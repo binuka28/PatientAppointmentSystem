@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+
 
 public class AppointmentFrame extends javax.swing.JFrame {
     
@@ -12,6 +15,14 @@ public class AppointmentFrame extends javax.swing.JFrame {
 
     public AppointmentFrame() {
      initComponents();
+     
+      SpinnerDateModel model = new SpinnerDateModel();
+    timeSpinner.setModel(model);
+
+    JSpinner.DateEditor editor =
+            new JSpinner.DateEditor(timeSpinner, "HH:mm");
+
+    timeSpinner.setEditor(editor);
 
     loadPatients();
     loadDoctors();
@@ -115,10 +126,11 @@ public class AppointmentFrame extends javax.swing.JFrame {
     }
 
 }
+   
     public void clearFields(){
 
     txtDate.setText("");
-    txtTime.setText("");
+    timeSpinner.setValue(new java.util.Date());
     txtStatus.setText("");
 
     cmbPatient.setSelectedIndex(0);
@@ -138,7 +150,6 @@ public class AppointmentFrame extends javax.swing.JFrame {
         cmbDoctor = new javax.swing.JComboBox<>();
         cmbPatient = new javax.swing.JComboBox<>();
         txtDate = new javax.swing.JTextField();
-        txtTime = new javax.swing.JTextField();
         txtStatus = new javax.swing.JTextField();
         btnDelete = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
@@ -148,6 +159,8 @@ public class AppointmentFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAppointment = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
+        dateChooser = new com.toedter.calendar.JDateChooser();
+        timeSpinner = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -233,6 +246,9 @@ public class AppointmentFrame extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtBack))))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(74, 74, 74)
@@ -247,15 +263,17 @@ public class AppointmentFrame extends javax.swing.JFrame {
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(34, 34, 34)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmbPatient, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbDoctor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtDate)
-                            .addComponent(txtTime, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(timeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(cmbPatient, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(dateChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                        .addComponent(cmbDoctor, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -272,13 +290,15 @@ public class AppointmentFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(cmbDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3))
+                    .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(timeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -355,65 +375,100 @@ public class AppointmentFrame extends javax.swing.JFrame {
 
     int row = tblAppointment.getSelectedRow();
 
-    if(row==-1){
-
-        JOptionPane.showMessageDialog(this,"Select Appointment");
-
+    if (row == -1) {
+        JOptionPane.showMessageDialog(this, "Please select an appointment!");
         return;
-
     }
 
-    int id =
-    Integer.parseInt(tblAppointment.getValueAt(row,0).toString());
+    if (dateChooser.getDate() == null) {
+        JOptionPane.showMessageDialog(this, "Please select appointment date!");
+        return;
+    }
+
+    int id = Integer.parseInt(tblAppointment.getValueAt(row, 0).toString());
 
     Connection con = DBConnection.getConnection();
 
-    String sql =
-    "UPDATE appointment SET patient_id=(SELECT patient_id FROM patient WHERE name=?),doctor_id=(SELECT doctor_id FROM doctor WHERE name=?),appointment_date=?,appointment_time=?,status=? WHERE appointment_id=?";
+    String sql = "UPDATE appointment SET "
+            + "patient_id=(SELECT patient_id FROM patient WHERE name=?), "
+            + "doctor_id=(SELECT doctor_id FROM doctor WHERE name=?), "
+            + "appointment_date=?, "
+            + "appointment_time=?, "
+            + "status=? "
+            + "WHERE appointment_id=?";
 
     PreparedStatement pst = con.prepareStatement(sql);
 
-    pst.setString(1,cmbPatient.getSelectedItem().toString());
-    pst.setString(2,cmbDoctor.getSelectedItem().toString());
-    pst.setString(3,txtDate.getText());
-    pst.setString(4,txtTime.getText());
-    pst.setString(5,txtStatus.getText());
-    pst.setInt(6,id);
+    // Patient
+    pst.setString(1, cmbPatient.getSelectedItem().toString());
+
+    // Doctor
+    pst.setString(2, cmbDoctor.getSelectedItem().toString());
+
+    // Date
+    java.sql.Date sqlDate = new java.sql.Date(dateChooser.getDate().getTime());
+    pst.setDate(3, sqlDate);
+
+    // Time
+    java.sql.Time sqlTime = new java.sql.Time(((java.util.Date) timeSpinner.getValue()).getTime());
+    pst.setTime(4, sqlTime);
+
+    // Status
+    pst.setString(5, txtStatus.getText());
+
+    // Appointment ID
+    pst.setInt(6, id);
 
     pst.executeUpdate();
 
-    JOptionPane.showMessageDialog(this,"Updated Successfully");
+    JOptionPane.showMessageDialog(this, "Appointment Updated Successfully!");
 
     loadAppointmentTable();
-
     clearFields();
 
-} catch(Exception e){
+} catch (Exception e) {
 
-    JOptionPane.showMessageDialog(this,e.getMessage());
+    JOptionPane.showMessageDialog(this, e.getMessage());
 
 }
-
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
        try {
 
+    if (dateChooser.getDate() == null) {
+        JOptionPane.showMessageDialog(this, "Please select appointment date!");
+        return;
+    }
+
     Connection con = DBConnection.getConnection();
 
-    String sql = "INSERT INTO appointment(patient_id,doctor_id,appointment_date,appointment_time,status) VALUES((SELECT patient_id FROM patient WHERE name=?),(SELECT doctor_id FROM doctor WHERE name=?),?,?,?)";
+    String sql = "INSERT INTO appointment(patient_id, doctor_id, appointment_date, appointment_time, status) "
+            + "VALUES((SELECT patient_id FROM patient WHERE name=?), "
+            + "(SELECT doctor_id FROM doctor WHERE name=?), ?, ?, ?)";
 
     PreparedStatement pst = con.prepareStatement(sql);
 
+    // Patient
     pst.setString(1, cmbPatient.getSelectedItem().toString());
+
+    // Doctor
     pst.setString(2, cmbDoctor.getSelectedItem().toString());
-    pst.setString(3, txtDate.getText());
-    pst.setString(4, txtTime.getText());
+
+    // Date
+    java.sql.Date sqlDate = new java.sql.Date(dateChooser.getDate().getTime());
+    pst.setDate(3, sqlDate);
+
+    // Time
+    java.sql.Time sqlTime = new java.sql.Time(((java.util.Date) timeSpinner.getValue()).getTime());
+    pst.setTime(4, sqlTime);
+
+    // Status
     pst.setString(5, txtStatus.getText());
 
     pst.executeUpdate();
 
-    JOptionPane.showMessageDialog(this, "Appointment Saved");
+    JOptionPane.showMessageDialog(this, "Appointment Saved Successfully!");
 
     loadAppointmentTable();
     clearFields();
@@ -427,17 +482,31 @@ public class AppointmentFrame extends javax.swing.JFrame {
 
     private void tblAppointmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAppointmentMouseClicked
       
+         try {
+
         int row = tblAppointment.getSelectedRow();
 
-cmbPatient.setSelectedItem(tblAppointment.getValueAt(row,1).toString());
+        cmbPatient.setSelectedItem(tblAppointment.getValueAt(row, 1).toString());
 
-cmbDoctor.setSelectedItem(tblAppointment.getValueAt(row,2).toString());
+        cmbDoctor.setSelectedItem(tblAppointment.getValueAt(row, 2).toString());
 
-txtDate.setText(tblAppointment.getValueAt(row,3).toString());
+        // Date
+        java.util.Date date = java.sql.Date.valueOf(tblAppointment.getValueAt(row, 3).toString());
+        dateChooser.setDate(date);
 
-txtTime.setText(tblAppointment.getValueAt(row,4).toString());
+        // Time
+        java.sql.Time time = java.sql.Time.valueOf(tblAppointment.getValueAt(row, 4).toString());
+        timeSpinner.setValue(time);
 
-txtStatus.setText(tblAppointment.getValueAt(row,5).toString());
+        // Status
+        txtStatus.setText(tblAppointment.getValueAt(row, 5).toString());
+
+    } catch (Exception e) {
+
+        JOptionPane.showMessageDialog(this, e.getMessage());
+
+    }
+
     }//GEN-LAST:event_tblAppointmentMouseClicked
 
     /**
@@ -472,6 +541,7 @@ txtStatus.setText(tblAppointment.getValueAt(row,5).toString());
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cmbDoctor;
     private javax.swing.JComboBox<String> cmbPatient;
+    private com.toedter.calendar.JDateChooser dateChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -480,9 +550,9 @@ txtStatus.setText(tblAppointment.getValueAt(row,5).toString());
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblAppointment;
+    private javax.swing.JSpinner timeSpinner;
     private javax.swing.JButton txtBack;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtStatus;
-    private javax.swing.JTextField txtTime;
     // End of variables declaration//GEN-END:variables
 }

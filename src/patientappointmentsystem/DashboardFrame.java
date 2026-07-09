@@ -35,7 +35,7 @@ public class DashboardFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         panelPatients1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        lblPatients = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         panelPatients2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -72,6 +72,7 @@ public class DashboardFrame extends javax.swing.JFrame {
         btnAppointment.addActionListener(this::btnAppointmentActionPerformed);
 
         btnReport.setText("Report");
+        btnReport.addActionListener(this::btnReportActionPerformed);
 
         btnLogout.setText("Logout");
         btnLogout.addActionListener(this::btnLogoutActionPerformed);
@@ -146,9 +147,9 @@ public class DashboardFrame extends javax.swing.JFrame {
         panelPatients1.setBackground(new java.awt.Color(85, 170, 200));
         panelPatients1.setPreferredSize(new java.awt.Dimension(200, 100));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel4.setText("Total Patients");
+        lblPatients.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblPatients.setForeground(new java.awt.Color(51, 51, 51));
+        lblPatients.setText("Total Patients");
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -162,7 +163,7 @@ public class DashboardFrame extends javax.swing.JFrame {
                 .addContainerGap(51, Short.MAX_VALUE)
                 .addGroup(panelPatients1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPatients1Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblPatients, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPatients1Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,7 +173,7 @@ public class DashboardFrame extends javax.swing.JFrame {
             panelPatients1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPatients1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jLabel4)
+                .addComponent(lblPatients)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addContainerGap(19, Short.MAX_VALUE))
@@ -355,6 +356,13 @@ this.dispose();
         this.dispose();
     }//GEN-LAST:event_btnDoctorActionPerformed
 
+    private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
+      ReportFrame open = new ReportFrame();
+        open.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_btnReportActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -393,7 +401,6 @@ this.dispose();
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -401,6 +408,7 @@ this.dispose();
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblPatients;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JPanel panelPatients;
     private javax.swing.JPanel panelPatients1;
